@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Procrastination Timer</title>
+  <style>
+    :root {
+      --bg-light: #5c4033;
+      --text-light: #f5f5f5;
+      --bg-dark: #1e1e1e;
+      --text-dark: #f0f0f0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://www.transparenttextures.com/patterns/wood.png');
+      background-color: var(--bg-light);
+      background-repeat: repeat;
+      background-size: cover;
+      color: var(--text-light);
+      transition: background 0.4s, color 0.4s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .timer-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .default-buttons,
+    .custom-inputs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .custom-inputs input {
+      width: 60px;
+      padding: 0.3rem;
+    }
+
+    .dark-toggle {
+      background: #333;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      padding: 0.4rem 0.6rem;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+    }
+
+    button {
+      border-radius: 12px;
+      background: linear-gradient(to right, #8b4513, #a0522d);
+      border: none;
+      color: white;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #a0522d, #cd853f);
+    }
+
+    input {
+      font-size: 1rem;
+    }
+
+    #timer {
+      font-size: 3rem;
+      margin: 1rem 0;
+    }
+
+    #memePopup, #lottieContainer {
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .meme-img {
+      max-width: 200px;
+      margin-top: 1rem;
+    }
+
+    .progress-ring {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+
+    .progress-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 10;
+    }
+
+    .progress-ring .track {
+      stroke: #bbb;
+    }
+
+    .progress-ring .progress {
+      stroke: #00c853;
+      stroke-dasharray: 314;
+      stroke-dashoffset: 314;
+      transition: stroke-dashoffset 0.5s;
+    }
+
+    /* Floating Words */
+    .floating-words {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .floating-word {
+      position: absolute;
+      left: -200px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.2);
+      animation: floatWord 6s linear infinite;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    @keyframes floatWord {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(120vw);
+        opacity: 0.4;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Procrastination Timer ⏳</h1>
+
+  <div class="timer-controls">
+    <div class="default-buttons">
+      <button onclick="startTimer(5, 0)">5 min</button>
+      <button onclick="startTimer(10, 0)">10 min</button>
+      <button onclick="startTimer(15, 0)">15 min</button>
+      <button onclick="startTimer(20, 0)">20 min</button>
+    </div>
+    <div class="custom-inputs">
+      <input id="customMin" type="number" placeholder="Min">
+      <input id="customSec" type="number" placeholder="Sec">
+      <button onclick="startCustom()">Start Custom</button>
+    </div>
+  </div>
+
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+
+  <div class="progress-ring">
+    <svg width="120" height="120">
+      <circle class="track" cx="60" cy="60" r="50"></circle>
+      <circle class="progress" cx="60" cy="60" r="50"></circle>
+    </svg>
+    <div id="timer">00:00</div>
+  </div>
+
+  <div id="memePopup"></div>
+  <div id="lottieContainer"></div>
+
+  <!-- Floating words container -->
+  <div class="floating-words">
+    <span class="floating-word">Focus</span>
+    <span class="floating-word">Discipline</span>
+    <span class="floating-word">Grind</span>
+    <span class="floating-word">Break</span>
+    <span class="floating-word">Refresh</span>
+    <span class="floating-word">Repeat</span>
+    <span class="floating-word">Hustle</span>
+    <span class="floating-word">Achieve</span>
+    <span class="floating-word">Progress</span>
+    <span class="floating-word">Work</span>
+    <span class="floating-word">Power</span>
+    <span class="floating-word">Grow</span>
+  </div>
+
+  <audio id="alertSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+  <script>
+    let interval;
+    const timerDisplay = document.getElementById("timer");
+    const memePopup = document.getElementById("memePopup");
+    const alertSound = document.getElementById("alertSound");
+    const progressCircle = document.querySelector(".progress-ring .progress");
+    const totalLength = 2 * Math.PI * 50;
+
+    progressCircle.style.strokeDasharray = totalLength;
+
+    const memes = [
+      { text: "Keep going, you legend! 😎", img: "https://i.imgflip.com/2wifvo.jpg" },
+      { text: "That was productive! Now smile. 😁", img: "https://i.imgflip.com/1otk96.jpg" },
+      { text: "Even Batman takes breaks. Be like Batman.", img: "https://i.imgflip.com/30b1gx.jpg" },
+      { text: "Productivity + Memes = 👑", img: "https://i.imgflip.com/4/4t0m5.jpg" }
+    ];
+
+    function startTimer(mins, secs) {
+      clearInterval(interval);
+      const duration = mins * 60 + secs;
+      let timeLeft = duration;
+      const start = Date.now();
+
+      interval = setInterval(() => {
+        let elapsed = Math.floor((Date.now() - start) / 1000);
+        let left = duration - elapsed;
+
+        if (left <= 0) {
+          clearInterval(interval);
+          showMeme();
+          playSound();
+          playLottie();
+        } else {
+          updateDisplay(left);
+          updateProgress(left, duration);
+        }
+      }, 1000);
+    }
+
+    function startCustom() {
+      let mins = parseInt(document.getElementById("customMin").value) || 0;
+      let secs = parseInt(document.getElementById("customSec").value) || 0;
+      startTimer(mins, secs);
+    }
+
+    function updateDisplay(seconds) {
+      let m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      let s = String(seconds % 60).padStart(2, '0');
+      timerDisplay.textContent = `${m}:${s}`;
+    }
+
+    function updateProgress(timeLeft, totalTime) {
+      const progress = totalLength * (timeLeft / totalTime);
+      progressCircle.style.strokeDashoffset = progress;
+    }
+
+    function showMeme() {
+      const random = memes[Math.floor(Math.random() * memes.length)];
+      memePopup.innerHTML = `<p>${random.text}</p><img class="meme-img" src="${random.img}" alt="Meme">`;
+    }
+
+    function playSound() {
+      alertSound.currentTime = 0;
+      alertSound.play();
+    }
+
+    function playLottie() {
+      const container = document.getElementById("lottieContainer");
+      container.innerHTML = "";
+      lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'https://assets10.lottiefiles.com/packages/lf20_rsa6mkzx.json'
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Assign random font and movement to floating words
+    const fonts = [
+      "Georgia", "Verdana", "Courier New", "Lucida Console", "Comic Sans MS",
+      "Trebuchet MS", "Impact", "Palatino Linotype", "Tahoma", "Arial Black"
+    ];
+
+    document.querySelectorAll('.floating-word').forEach(word => {
+      const top = Math.random() * 90 + 5;
+      const delay = Math.random() * 5;
+      const duration = 5 + Math.random() * 3;
+      const font = fonts[Math.floor(Math.random() * fonts.length)];
+
+      word.style.top = `${top}%`;
+      word.style.animationDelay = `${delay}s`;
+      word.style.animationDuration = `${duration}s`;
+      word.style.fontFamily = font;
+    });
+  </script>
+</body>
+</html>
+

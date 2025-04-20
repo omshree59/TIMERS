@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Procrastination Timer</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Procrastination Timer</h1>
+    <div id="timer">5:00</div>
+    <div class="buttons">
+      <button onclick="startTimer()">Start</button>
+      <button onclick="pauseTimer()">Pause</button>
+      <button onclick="resetTimer()">Reset</button>
+    </div>
+    <p>Streak: <span id="streak">0</span></p>
+    <div id="motivation" class="hidden">
+      <h2>Motivation Break!</h2>
+      <div id="content"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
