@@ -60,9 +60,11 @@ _(...and more!)_
 3)- styles.css
 
 
----## CLONE INSTALLATION ## 
+---## CLONE INSTALLATION ##-----
 clone this with :-
 https://github.com/omshree59/TIMERS.git
+-
+
 
 🙌 Credits
 Built with 💻 and 💡 by:
@@ -86,6 +88,4 @@ A Web Development Project made with passion and caffeine ☕🚀
 ...⭐ Like it?
 If this helped you beat procrastination or you just loved the memes —
 give it a ⭐ and feel free to contribute or fork it for your own focus journey!
-
-
 
