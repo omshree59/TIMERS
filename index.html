@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+</head>
+<body>
+    <div id="progressReport" onclick="toggleReport()">
+        <h2>📋 Session Report</h2>
+        <ul id="reportList"></ul>
+    </div>   
+<h1>Procrastination Timer ⏳</h1>
+
+<div class="timer-controls">
+  <div class="default-buttons">
+    <button onclick="startTimer(5, 0)">5 min</button>
+    <button onclick="startTimer(10, 0)">10 min</button>
+    <button onclick="startTimer(15, 0)">15 min</button>
+    <button onclick="startTimer(30, 0)">30 min</button>
+    <button onclick="startTimer(60,0)">1 hr</button>
+  </div>
+  <div class="custom-inputs">
+    <input id="customHour" type="number" placeholder="Hr" min="0" oninput="validity.valid||(value='');">
+    <input id="customMin" type="number" placeholder="Min" min="0" oninput="validity.valid||(value='');">
+    <input id="customSec" type="number" placeholder="Sec" min="0" oninput="validity.valid||(value='');">
+    <button onclick="startCustom()">Start Custom</button>
+  </div>
+  
+  <div class="control-buttons">
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resumeTimer()">Resume</button>
+    <button onclick="restartTimer()">Restart</button>
+  </div>      
+</div>
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+
+<div class="progress-ring">
+  <svg width="120" height="120">
+    <circle class="track" cx="60" cy="60" r="50"></circle>
+    <circle class="progress" cx="60" cy="60" r="50"></circle>
+  </svg>
+  <div id="timer">00:00:00</div>
+</div>
+
+<div id="streakDisplay">🔥 Streak: 0</div>
+<div id="memePopup"></div>
+<div id="lottieContainer"></div>
+<div id="achievement-panel">
+    <h2>Achievements</h2>
+    <div id="achievements-list"></div>
+  </div>
+  
+
+<!-- Floating words container -->
+<div class="floating-words">
+  <span class="floating-word">Focus</span>
+  <span class="floating-word">Discipline</span>
+  <span class="floating-word">Grind</span>
+  <span class="floating-word">Break</span>
+  <span class="floating-word">Refresh</span>
+  <span class="floating-word">Repeat</span>
+  <span class="floating-word">Hustle</span>
+  <span class="floating-word">Achieve</span>
+  <span class="floating-word">Progress</span>
+  <span class="floating-word">Work</span>
+  <span class="floating-word">Power</span>
+  <span class="floating-word">Grow</span>
+</div>
+<audio id="alertSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+:root {
+--bg-light: #d4602bee;
+--text-light: #f5f5f5;
+--bg-dark: #1e1e1e;
+--text-dark: #f0f0f0;
+}
+
+body {
+margin: 0;
+font-family: 'Segoe UI', sans-serif;
+background-image: url('https://images.pexels.com/photos/172276/pexels-photo-172276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+background-color: var(--bg-light);
+background-repeat: repeat;
+background-size: cover;
+color: var(--text-light);
+transition: background 0.4s, color 0.4s;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+padding: 2rem;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+body.dark-mode {
+background-color: var(--bg-dark);
+color: var(--text-dark);
+}
+body.dark-mode button,
+body.dark-mode .default-buttons,
+body.dark-mode .custom-inputs input {
+background: linear-gradient(to right, #191919, #353535) !important;
+color: #fff !important;
+border: none;
+}
+body.dark-mode #achievement-panel {
+background: linear-gradient(to right, #222, #333) !important;
+border-top: 2px solid #444 !important;
+}
+body.dark-mode #progressReport {
+background: rgba(30,30,30,0.95) !important;
+color: #f0f0f0 !important;
+}
+body.dark-mode {
+background-image: none !important;
+background-color: #121212 !important;
+color: #f0f0f0;
+}
+
+  
+  h1 {
+    margin-bottom: 2rem;
+    font-size: 4rem;
+    margin-left: 1rem;
+    font-family: 'Pacifico', cursive;
+    font-weight: normal;
+    color: rgb(255, 255, 255);
+  }
+
+  .timer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
+  .default-buttons,
+  .custom-inputs input {
+padding: 0.6rem 1rem; /* Same padding as button */
+font-size: 1rem;       /* Same font size */
+border-radius: 12px;   /* Same rounded corners */
+border: none;
+background: linear-gradient(to right, #552504, #664a3c); /* Button gradient */
+color: white;
+text-align: center;
+width: auto;           /* Allow it to size like a button */
+min-width: 110px;      /* Similar to button width */
+box-sizing: border-box;
+outline: none;
+transition: background 0.3s;
+}
+
+.custom-inputs input::placeholder {
+color: rgba(255, 255, 255, 0.7);
+}
+
+.custom-inputs input:hover {
+background: linear-gradient(to right, #a0522d, #cd853f); /* Button hover */
+}
+
+
+
+  .control-buttons {
+display: flex;
+gap: 1rem;
+margin-top: 1rem;
+justify-content: center;
+}
+
+
+  .custom-inputs input {
+    width: 60px;
+    padding: 0.3rem;
+  }
+
+  .dark-toggle {
+    background: #333;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.6rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  button {
+    border-radius: 12px;
+    background: linear-gradient(to right, #552504, #664a3c);
+    border: none;
+    color: white;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: linear-gradient(to right, #a0522d, #cd853f);
+  }
+
+  input {
+    font-size: 1rem;
+  }
+
+  #timer {
+font-family: 'Share Tech Mono', monospace;
+font-size: 2rem;
+letter-spacing: 4px;
+color: #ff0000;
+background-color: #000000cc; /* semi-transparent black */
+padding: 1rem 2rem;
+border: 2px solid #ff0000;
+border-radius: 12px;
+box-shadow: 
+  0 0 10px #ff0000,
+  0 0 5px #ff0000,
+  inset 0 0 10px #000000;
+width: fit-content;
+margin: 1rem auto;
+text-align: center;
+transform: translateX(-60px);
+}
+  
+  #streakDisplay {
+font-size: 1.2rem;
+margin-top: 10rem;
+color: gold;
+font-weight: bold;
+}
+
+/* Dropdown styles */
+#progressReport {
+  margin-top: 3rem;
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+#reportList {
+  list-style: none;
+  padding: 0;
+  display: none;
+  margin-top: 1rem;
+}
+
+#progressReport.open #reportList {
+  display: block;
+}
+
+
+
+  #memePopup, #lottieContainer {
+    margin: 5rem 0;
+    text-align: center;
+  }
+
+  .meme-img {
+    max-width: 200px;
+    margin-top: 1rem;
+  }
+
+  .progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .progress-ring svg {
+    transform: rotate(-90deg);
+  }
+
+  .progress-ring circle {
+    fill: none;
+    stroke-width: 10;
+  }
+
+  .progress-ring .track {
+    stroke: #f7170f;
+  }
+
+  .progress-ring .progress {
+    stroke: #7bff23;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 314;
+    transition: stroke-dashoffset 0.5s;
+  }
+
+  /* Floating Words */
+  .floating-words {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .floating-word {
+    position: absolute;
+    left: -200px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    animation: floatWord 6s linear infinite;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  @keyframes floatWord {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(120vw);
+      opacity: 0.4;
+    }
+  }
+#achievement-panel {
+  width: 100%;
+  background: linear-gradient(to right, #552504, #664a3c);
+  border-top: 2px solid #ffffff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 60px;
+}
+
+#achievement-panel h2 {
+margin-top: 0;
+text-align: center;
+font-size: 45px;
+margin-bottom: 20px;
+font-family: 'Anton', sans-serif;
+font-weight: 800; /* Use 700–900 for boldness */
+color: rgb(202, 144, 105);
+}
+
+.achievement {
+  margin-bottom: 20px;
+}
+
+.achievement-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.achievement-label .unlocked {
+  color: green;
+  font-weight: bold;
+}
+
+.progress-bar {
+  background: #ddd;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: #4caf50;
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.achievement-description {
+  font-size: 13px;
+  color: #cacaa6;
+  margin-top: 5px;
+}
