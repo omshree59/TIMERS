@@ -60,7 +60,9 @@ _(...and more!)_
 3)- styles.css
 
 
----
+---## CLONE INSTALLATION ## 
+clone this with :-
+https://github.com/omshree59/TIMERS.git
 
 🙌 Credits
 Built with 💻 and 💡 by:
